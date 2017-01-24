@@ -1,19 +1,19 @@
 import config from '../config'
 import { resolve } from 'path'
-import logger from '../tools/logger'
 import { compact, makeRule } from '../tools/helpers'
 
 import LogCompilerErrorsPlugin from './plugins/logCompilerErrors'
 import WriteBundlePathsToJSONPlugin from './plugins/WriteBundlePathsToJSON'
-import { HotModuleReplacementPlugin } from 'webpack'
+import { HotModuleReplacementPlugin, NamedModulesPlugin } from 'webpack'
 
 const DEBUG = config.env !== 'production'
 
 export default {
   entry: {
     client: compact([
-      resolve(__dirname, '../src/client/index.js'),
-      DEBUG ? 'webpack-hot-middleware/client' : null
+      // DEBUG ? 'react-hot-loader/patch' : null,
+      // DEBUG ? 'webpack-hot-middleware/client' : null,
+      resolve(__dirname, '../src/client/index.js')
     ])
   },
   output: {
@@ -21,11 +21,10 @@ export default {
     pathinfo: DEBUG,
     publicPath: './public',
     hashDigestLength: 7,
-    libraryTarget: 'umd',
-    umdNamedDefine: false,
     filename: `[name]${DEBUG ? '' : '.[chunkhash]'}.js`
   },
-  target: 'node',
+  target: 'web',
+  // devtool: DEBUG ? 'inline-source-map' : null,
   module: {
     rules: compact([
       makeRule(/\.jsx?$/, 'standard-loader', 'pre'),
@@ -33,8 +32,9 @@ export default {
     ])
   },
   plugins: compact([
-    DEBUG ? new HotModuleReplacementPlugin() : null,
-    new LogCompilerErrorsPlugin(logger),
+    // DEBUG ? new HotModuleReplacementPlugin() : null,
+    DEBUG ? new NamedModulesPlugin() : null,
+    new LogCompilerErrorsPlugin(),
     new WriteBundlePathsToJSONPlugin()
   ]),
   stats: {

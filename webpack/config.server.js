@@ -1,8 +1,6 @@
-// import {HotModuleReplacementPlugin} from 'webpack'
 import config from '../config'
 import { resolve } from 'path'
-import logger from '../tools/logger'
-import { compact, makeRule } from '../tools/helpers'
+import { makeRule } from '../tools/helpers'
 
 import LogCompilerErrorsPlugin from './plugins/logCompilerErrors'
 import WriteBundlePathsToJSONPlugin from './plugins/WriteBundlePathsToJSON'
@@ -23,16 +21,15 @@ export default {
   },
   target: 'node',
   module: {
-    rules: compact([
+    rules: [
       makeRule(/\.jsx?$/, 'standard-loader', 'pre'),
       makeRule(/\.jsx?$/, 'babel-loader')
-    ])
+    ]
   },
-  plugins: compact([
-    // DEBUG ? new HotModuleReplacementPlugin() : null,
-    new LogCompilerErrorsPlugin(logger),
+  plugins: [
+    new LogCompilerErrorsPlugin(),
     new WriteBundlePathsToJSONPlugin()
-  ]),
+  ],
   stats: {
     chunks: true, // Makes the build much quieter
     colors: true, // Shows colors in the console
