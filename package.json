@@ -1,0 +1,58 @@
+{
+  "name": "node-project",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "Ron Gierlach <rongierlach@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf bundles/*",
+    "build": "npm run clean && webpack",
+    "build:prod": "NODE_ENV=production npm run build",
+    "serve": "node index.js",
+    "serve:prod": "NODE_ENV=production node index.js",
+    "start": "npm run build && npm run serve",
+    "start:prod": "npm run build:prod && npm run serve:prod",
+    "dev": "NODE_ENV=development npm run start",
+    "test": ""
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.7",
+    "dotenv": "^2.0.0",
+    "inferno": "^1.2.1",
+    "koa": "2",
+    "koa-bodyparser": "next",
+    "koa-compose": "next",
+    "koa-convert": "^1.2.0",
+    "koa-cors": "next",
+    "koa-generic-session": "next",
+    "koa-passport": "next",
+    "koa-route": "next",
+    "koa-static": "^2.0.0",
+    "moment": "^2.17.1",
+    "mongoose": "^4.8.0",
+    "passport-facebook": "^2.1.1",
+    "passport-twitter": "^1.0.4",
+    "ramda": "^0.22.1",
+    "webpack": "2.2.0",
+    "winston-koa-logger": "next"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-ramda": "^1.1.6",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.22.0",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.16.0",
+    "extract-text-webpack-plugin": "2.0.0-beta.4",
+    "standard": "^8.6.0",
+    "standard-loader": "^5.0.0",
+    "webpack-make-rule": "^1.1.1",
+    "winston": "^2.3.0",
+    "winston-daily-rotate-file": "^1.4.0"
+  }
+}
