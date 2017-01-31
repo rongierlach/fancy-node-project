@@ -2,6 +2,7 @@ import config from '../config'
 import { resolve } from 'path'
 import { makeRule } from '../tools/helpers'
 
+import { DefinePlugin } from 'webpack'
 import LogCompilerErrorsPlugin from './plugins/logCompilerErrors'
 import WriteBundlePathsToJSONPlugin from './plugins/WriteBundlePathsToJSON'
 
@@ -27,6 +28,7 @@ export default {
     ]
   },
   plugins: [
+    new DefinePlugin({config: JSON.stringify(config)}),
     new LogCompilerErrorsPlugin(),
     new WriteBundlePathsToJSONPlugin()
   ],
