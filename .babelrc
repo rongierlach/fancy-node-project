@@ -1,0 +1,18 @@
+{
+  "presets": [
+    "react",
+    "latest",
+    "stage-0"
+  ],
+  "plugins": [
+    "ramda",
+    "transform-runtime"
+  ],
+  "env": {
+    "development": {
+      "presets": [
+        "react-hmre"
+      ]
+    }
+  }
+}
