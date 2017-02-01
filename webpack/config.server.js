@@ -2,7 +2,6 @@ import config from '../config'
 import { resolve } from 'path'
 import { makeRule } from '../tools/helpers'
 
-import { DefinePlugin } from 'webpack'
 import LogCompilerErrorsPlugin from './plugins/logCompilerErrors'
 import WriteBundlePathsToJSONPlugin from './plugins/WriteBundlePathsToJSON'
 
@@ -27,8 +26,14 @@ export default {
       makeRule(/\.jsx?$/, 'babel-loader')
     ]
   },
+  resolve: {
+    alias: {
+      config$: resolve(__dirname, '../config'),
+      logger$: resolve(__dirname, '../tools/logger.js'),
+      helpers$: resolve(__dirname, '../tools/helpers.js')
+    }
+  },
   plugins: [
-    new DefinePlugin({config: JSON.stringify(config)}),
     new LogCompilerErrorsPlugin(),
     new WriteBundlePathsToJSONPlugin()
   ],
