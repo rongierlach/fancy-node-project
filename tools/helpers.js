@@ -1,8 +1,8 @@
-import R from 'ramda'
+import { reject, isNil } from 'ramda'
 import makeRule from 'webpack-make-rule'
 
 // https://lodash.com/docs/4.17.3#compact
-const compact = R.reject(R.isNil)
+const compact = reject(isNil)
 
 // http://stackoverflow.com/questions/13218745/convert-complex-javascript-object-to-dot-notation-object
 const dotize = (obj, prefix = '', result = {}) => {
