@@ -1,5 +1,6 @@
-// if (module.hot) {
-//   module.hot.accept()
-// }
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
 
-console.log('client')
+const rootNode = document.getElementById('#root')
+ReactDOM.render(<App />, rootNode)
