@@ -16,12 +16,16 @@ WriteBundlePathsToJSONPlugin.prototype.apply = function (compiler) {
       const fileValue = JSON.parse(fileContentString)
 
       const bundlesObj = chunks.reduce((acc, {name, renderedHash}) => {
-        acc[name] = name === 'client'
-          ? {
-            dev: path.join(outputPath, `${name}.js`),
-            hashed: path.join(outputPath, `${name}.${renderedHash}.js`)
-          }
-          : path.join(outputPath, `${name}.js`)
+        switch (name) {
+          case 'client' :
+            acc[name] = {
+              dev: path.join(outputPath, `${name}.js`),
+              hashed: path.join(outputPath, `${name}.${renderedHash}.js`)
+            }
+            break
+          default :
+            acc[name] = path.join(outputPath, `${name}.js`)
+        }
         return acc
       }, fileValue)
 
