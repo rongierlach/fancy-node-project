@@ -5,7 +5,7 @@ import config from 'config'
 
 const {api: {port}} = config
 
-export const start = async => {
+export const start = async _ => {
   try {
     await db()
     logger.info('Connected to database')
