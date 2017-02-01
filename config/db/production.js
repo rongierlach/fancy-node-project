@@ -1,5 +1,3 @@
 export default {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  pass: process.env.DB_PASS
+  uri: process.env.MONGO_URI
 }

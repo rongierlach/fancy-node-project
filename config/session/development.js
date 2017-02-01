@@ -8,6 +8,7 @@ export default {
     overwrite: false,
     domain: process.env.COOKIE_DOMAIN,
     secure: process.env.USE_HTTPS === 'true' || false,
-    maxAge: process.env.COOKIE_MAX_AGE || 24 * 60 * 1000
+    maxAge: process.env.COOKIE_MAX_AGE || 24 * 60 * 1000,
+    secrets: process.env.COOKIE_SECRETS
   }
 }

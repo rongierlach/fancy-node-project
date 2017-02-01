@@ -1,16 +1,19 @@
-// load in environt variables from .env file
+// load in environment variables from .env file
 import dotenv from 'dotenv'
 dotenv.load()
 
 // names of required environment variables
 const REQUIRED_VAR_NAMES = [
   'NODE_ENV',
-  'HOSTNAME',
   'PORT',
-  'DB_HOST',
+  'HOSTNAME',
+  'API_PORT',
+  'API_HOSTNAME',
+  'MONGO_URI',
   'REDIS_URL',
   'COOKIE_NAME',
   'COOKIE_DOMAIN',
+  'COOKIE_SECRETS',
   'COOKIE_MAX_AGE',
   'USE_HTTPS'
 ]
