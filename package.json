@@ -53,6 +53,7 @@
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.16.0",
     "extract-text-webpack-plugin": "2.0.0-beta.4",
+    "koa-webpack": "next",
     "standard": "^8.6.0",
     "standard-loader": "^5.0.0",
     "webpack-make-rule": "^1.1.1",
