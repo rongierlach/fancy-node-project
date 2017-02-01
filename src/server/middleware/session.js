@@ -1,12 +1,13 @@
 import R from 'ramda'
+import config from 'config'
 import convert from 'koa-convert'
 import session from 'koa-generic-session'
-import redis from 'koa-redis'
+import MongoStore from 'koa-generic-session-mongo'
 
-const { redis: redisOpts, session: sessionOpts } = config // eslint-disable-line no-undef
+const { db: { host: url }, session: sessionOpts } = config
 
 const storeLens = R.lensProp('store')
-const storeValue = redis(redisOpts)
+const storeValue = new MongoStore({url})
 const setStore = R.set(storeLens, storeValue)
 
 export default R.compose(

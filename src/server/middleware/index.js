@@ -1,13 +1,12 @@
 import compose from 'koa-compose'
 
 import logger from './logger'
-// import session from './session'
 import cors from './cors'
-import bodyarser from './bodyparser'
+import bodyparser from './bodyparser'
 
 // // webpack hot middleware
 // import {env} from '../../../config'
-// import {compact} from '../../../tools/helpers'
+// import {compact} from 'helpers'
 // import webpack from 'webpack'
 // import webpackConfig from '../../../tools/config.babel.js'
 // // import { devMiddleware, hotMiddleware } from 'koa-webpack-dev-middleware'
@@ -16,7 +15,6 @@ import bodyarser from './bodyparser'
 
 export default compose([
   logger,
-  // session,
   cors,
-  bodyarser
+  bodyparser
 ])
