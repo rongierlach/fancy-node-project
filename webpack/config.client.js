@@ -2,9 +2,10 @@ import config from '../config'
 import { resolve } from 'path'
 import { compact, makeRule } from '../tools/helpers'
 
+import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 import LogCompilerErrorsPlugin from './plugins/logCompilerErrors'
 import WriteBundlePathsToJSONPlugin from './plugins/WriteBundlePathsToJSON'
-import { HotModuleReplacementPlugin, NamedModulesPlugin } from 'webpack'
+import {HotModuleReplacementPlugin, NamedModulesPlugin} from 'webpack'
 
 const DEBUG = config.env !== 'production'
 
@@ -24,7 +25,7 @@ export default {
     filename: `[name]${DEBUG ? '' : '.[chunkhash]'}.js`
   },
   target: 'web',
-  // devtool: DEBUG ? 'inline-source-map' : null,
+  devtool: DEBUG ? 'inline-source-map' : undefined,
   module: {
     rules: compact([
       makeRule(/\.jsx?$/, 'standard-loader', 'pre'),
@@ -32,8 +33,9 @@ export default {
     ])
   },
   plugins: compact([
+    new ProgressBarPlugin(),
     // DEBUG ? new HotModuleReplacementPlugin() : null,
-    DEBUG ? new NamedModulesPlugin() : null,
+    // DEBUG ? new NamedModulesPlugin() : null,
     new LogCompilerErrorsPlugin(),
     new WriteBundlePathsToJSONPlugin()
   ]),

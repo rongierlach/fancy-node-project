@@ -2,6 +2,7 @@ import config from '../config'
 import { resolve } from 'path'
 import { compact, makeRule } from '../tools/helpers'
 
+import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 import { DefinePlugin, HotModuleReplacementPlugin } from 'webpack'
 import LogCompilerErrorsPlugin from './plugins/logCompilerErrors'
 import WriteBundlePathsToJSONPlugin from './plugins/WriteBundlePathsToJSON'
@@ -39,6 +40,7 @@ export default {
     }
   },
   plugins: compact([
+    new ProgressBarPlugin(),
     new DefinePlugin({DEBUG: JSON.stringify(DEBUG)}),
     // DEBUG ? new HotModuleReplacementPlugin() : null,
     new LogCompilerErrorsPlugin(),
@@ -46,8 +48,8 @@ export default {
   ]),
   stats: {
     chunks: true, // Makes the build much quieter
-    colors: true, // Shows colors in the console
-    hash: true,
+    // colors: true, // Shows colors in the console
+    // hash: true,
     version: false,
     timings: true
   }

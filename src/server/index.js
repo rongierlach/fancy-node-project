@@ -1,7 +1,3 @@
-if (module.hot) {
-  module.hot.accept()
-}
-
 import server from './server'
 import logger from 'logger'
 import config from 'config'

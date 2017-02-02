@@ -2,6 +2,7 @@ import config from '../config'
 import { resolve } from 'path'
 import { makeRule } from '../tools/helpers'
 
+import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 import LogCompilerErrorsPlugin from './plugins/logCompilerErrors'
 import WriteBundlePathsToJSONPlugin from './plugins/WriteBundlePathsToJSON'
 
@@ -34,13 +35,14 @@ export default {
     }
   },
   plugins: [
+    new ProgressBarPlugin(),
     new LogCompilerErrorsPlugin(),
     new WriteBundlePathsToJSONPlugin()
   ],
   stats: {
     chunks: true, // Makes the build much quieter
-    colors: true, // Shows colors in the console
-    hash: true,
+    // colors: true, // Shows colors in the console
+    // hash: true,
     version: false,
     timings: true
   }
