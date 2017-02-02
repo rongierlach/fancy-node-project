@@ -1,0 +1,50 @@
+#! /usr/bin/env node
+require('babel-register')
+const webpack = require('webpack')
+const chokidar = require('chokidar')
+const nodemon = require('nodemon')
+const resolve = require('path').resolve
+const once = require('ramda').once
+
+const entryKeys = ['api', 'server']
+
+const multiConfig = entryKeys
+  .map(key => resolve(__dirname, `../../webpack/config.${key}.js`))
+  .map(path => require(path).default)
+
+const serverPaths = entryKeys
+  .map(key => resolve(__dirname, `../../src/${key}`))
+
+process.on('SIGINT', process.exit)
+
+let serverCompiler
+
+const startServer = () => {
+  nodemon({
+    script: 'index.js',
+    watch: serverPaths,
+    nodeArgs: process.argv.slice(2)
+  })
+  //.on('quit', process.exit)
+}
+
+const compileServer = () =>
+  serverCompiler.run(() => undefined)
+
+const startServerOnce = once(startServer)
+
+const watcher = chokidar.watch(serverPaths)
+
+watcher.on('ready', () => {
+  watcher
+    .on('add', compileServer)
+    .on('addDir', compileServer)
+    .on('change', compileServer)
+    .on('unlink', compileServer)
+    .on('unlinkDir', compileServer)
+})
+
+serverCompiler = webpack(multiConfig, (err, stats) => {
+  if (err) console.log(err)
+  startServerOnce()
+})
