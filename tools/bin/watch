@@ -15,6 +15,10 @@ const multiConfig = entryKeys
 const serverPaths = entryKeys
   .map(key => resolve(__dirname, `../../src/${key}`))
 
+const configPath = resolve(__dirname, '../../config')
+
+const watchPaths = serverPaths.concat(configPath)
+
 process.on('SIGINT', process.exit)
 
 let serverCompiler
@@ -22,10 +26,10 @@ let serverCompiler
 const startServer = () => {
   nodemon({
     script: 'index.js',
-    watch: serverPaths,
+    watch: watchPaths,
     nodeArgs: process.argv.slice(2)
   })
-  //.on('quit', process.exit)
+  .on('quit', process.exit)
 }
 
 const compileServer = () =>
