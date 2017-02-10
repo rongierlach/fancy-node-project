@@ -1,4 +1,5 @@
 import logger from './logger'
+import head from './head'
 import api from './api'
 import server from './server'
 import db from './db'
@@ -10,6 +11,7 @@ const env = process.env.NODE_ENV
 
 export {
   env,
+  head,
   api,
   server,
   db,
